@@ -1,0 +1,76 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 355px;
+}
+
+.header {
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 57px;
+}
+
+.input-container {
+    margin-bottom: 46px;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #E4E4E4;
+    margin-bottom: 25px;
+}
+
+.label {
+    text-align: left;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.input {
+    border: none;
+}
+
+.passport-question-wrapper {
+    display: flex;
+    justify-content: end;
+}
+
+.passport-question-btn {
+    font-weight: 400;
+    font-size: 14px;
+    color: #828282;
+}
+
+.entry-btn {
+    height: 61px;
+    background: #FDBF5A;
+    border-radius: 70px;
+    font-weight: 400;
+    font-size: 25px;
+    margin-bottom: 33px;
+}
+
+.entry-btn:hover {
+    background: #FFA842;
+}
+
+.registration-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.registration-question {
+    color: #828282;
+    margin-right: 5px;
+}
+
+.registration-btn {
+    font-weight: 400;
+    font-size: 16px;
+    color: #FDBF5A;
+}
