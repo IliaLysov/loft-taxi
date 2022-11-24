@@ -3,7 +3,7 @@ import './Login.css'
 
 export default function Login({setLogin, setPage}) {
     return (
-        <form className="form">
+        <form className="form" onSubmit={() => setLogin(true)}>
             <div className="header">Войти</div>
             <div className="input-container">
                 <div className="input-wrapper">
@@ -18,7 +18,7 @@ export default function Login({setLogin, setPage}) {
                     <button className="btn passport-question-btn">Забыли пароль?</button>
                 </div>
             </div>
-            <button className="btn entry-btn" onClick={() => setLogin(true)}>Войти</button>
+            <input className="btn entry-btn" type="submit" value="Войти" />
             <div className="registration-wrapper">
                 <div className="registration-question">Новый пользователь?</div>
                 <button className="btn registration-btn" onClick={() => setPage('registration')}>Регистрация</button>
