@@ -1,0 +1,29 @@
+.map-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.map-header {
+    height: 102px;
+    background: #1C1A19;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.navigation {
+    display: flex;
+    margin-right: 50px;
+}
+
+.nav {
+    color: white;
+    margin-right: 40px;
+}
+
+.map-container {
+    flex: 1;
+    background-image: url('../../images/map.png');
+}
