@@ -3,7 +3,7 @@ import React from "react"
 
 export default function registration({setLogin, setPage}) {
     return (
-        <form className="form">
+        <form className="form" onSubmit={() => setLogin(true)}>
             <div className="header">Регистрация</div>
             <div className="input-container">
                 <div className="input-wrapper">
@@ -19,7 +19,7 @@ export default function registration({setLogin, setPage}) {
                     <input className="input" id="password" type="password" name="password" />
                 </div>
             </div>
-            <button className="btn entry-btn" onClick={() => setLogin(true)}>Зарегистрироваться</button>
+            <input className="btn entry-btn" type="submit" value="Зарегистрироваться" />
             <div className="registration-wrapper">
                 <div className="registration-question">Новый пользователь?</div>
                 <button className="btn registration-btn" onClick={() => setPage('login')}>Войти</button>
