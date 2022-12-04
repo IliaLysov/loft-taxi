@@ -10,11 +10,11 @@
     margin-bottom: 57px;
 }
 
-.input-container {
+.inputContainer {
     margin-bottom: 46px;
 }
 
-.input-wrapper {
+.inputWrapper {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid #E4E4E4;
@@ -32,18 +32,18 @@
     border: none;
 }
 
-.passport-question-wrapper {
+.passportQuestionWrapper {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
-.passport-question-btn {
+.passportQuestionBtn {
     font-weight: 400;
     font-size: 14px;
     color: #828282;
 }
 
-.entry-btn {
+.entryBtn {
     height: 61px;
     background: #FDBF5A;
     border-radius: 70px;
@@ -53,24 +53,24 @@
     border: none;
 }
 
-.entry-btn:hover {
+.entryBtn:hover {
     background: #FFA842;
 }
 
-.registration-wrapper {
+.registrationWrapper {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     font-weight: 400;
     font-size: 16px;
 }
 
-.registration-question {
+.registrationQuestion {
     color: #828282;
     margin-right: 5px;
 }
 
-.registration-btn {
+.registrationBtn {
     font-weight: 400;
     font-size: 16px;
     color: #FDBF5A;
