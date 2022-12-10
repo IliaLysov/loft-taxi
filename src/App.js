@@ -1,16 +1,21 @@
 import './App.css';
-import React, {useState} from 'react';
-import Start from './Components/Start/Start'
-import Map from './Components/Map/Map'
+import React from 'react';
+import {Unauthorized, Authorized} from './Pages'
+import { withAuth } from './contexts';
 
-function App() {
-  const [login, setLogin] = useState(false)
+function App(props) {
+  const {isLoggedIn} = props
+
 
   return (
     <div className="App">
-      {login ? <Map /> : <Start setLogin={setLogin} />}
+      {
+        isLoggedIn
+        ? <Authorized />
+        : <Unauthorized  />
+      }
     </div>
   )
 }
 
-export default App;
+export default withAuth(App);
