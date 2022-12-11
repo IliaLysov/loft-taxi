@@ -2,10 +2,11 @@ import React, {useState} from "react"
 import './style.css'
 import {Auth} from '../../Components'
 import logo_img from '../../images/logo.svg'
-import {withAuth} from '../../contexts'
+import {authentificate} from '../../modules/auth'
+import { connect } from "react-redux"
 
 function Unauthorized(events) {
-    const {logIn} = events
+    const {authentificate} = events
 
     const [isRegistered, setRegistration] = useState(true)
 
@@ -14,8 +15,7 @@ function Unauthorized(events) {
         let send_obj = {sendType: isRegistered ? 'login' : 'registration'}
         e.target.querySelectorAll('input').forEach(el => send_obj[el.name] = el.value)
         
-        logIn(send_obj.email, send_obj.password).catch(err => {alert('не правильный логин или пароль')})
-        console.log(send_obj)
+        authentificate(send_obj).catch(err => {alert('не правильный логин или пароль')})
     }
     
     return (
@@ -32,4 +32,4 @@ function Unauthorized(events) {
     )
 }
 
-export default withAuth(Unauthorized);
+export default connect(state => ({isLoggedIn: state.auth.isLoggedIn}), {authentificate})(Unauthorized);

@@ -33,3 +33,8 @@ button {
   left: 0;
   bottom: 0;
 }
+
+a.active {
+  color: #FDBF5A;
+  pointer-events: none;
+}
