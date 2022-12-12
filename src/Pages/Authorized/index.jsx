@@ -11,8 +11,8 @@ function Authorized() {
             <Header/>
             <div className={css.container}>
                 <Routes>
-                    <Route exact path="/order" element={<PrivateRoute/>}>
-                        <Route exact path="/order" element={
+                    <Route exact path="/" element={<PrivateRoute/>}>
+                        <Route exact path="/" element={
                             <div className={css.orderWrapper}>
                                 <Order />
                             </div>
@@ -21,7 +21,7 @@ function Authorized() {
                     <Route exact path="/profile" element={<PrivateRoute/>}>
                         <Route exact path="/profile" element={
                             <div className={css.windowModal}>
-                                <Link to="/order" className={css.windowModalLink}/>
+                                <Link to="/" className={css.windowModalLink}/>
                                 <div className={css.windowModalContent}>
                                     <Profile />
                                 </div>

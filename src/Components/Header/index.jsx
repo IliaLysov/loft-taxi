@@ -12,9 +12,9 @@ function Header(events) {
         <header className={css.header}>
             <img className={css.logo} src={logo_img} alt="logo" />
             <div className={css.navigation}>
-                <NavLink to="/order" className={css.nav}>Карта</NavLink>
+                <NavLink to="/" className={css.nav}>Карта</NavLink>
                 <NavLink to="/profile" className={css.nav}>Профиль</NavLink>
-                <NavLink to="/login" className={css.nav} onClick={logOut}>Выйти</NavLink>
+                <button className={css.nav} onClick={() => {logOut(); localStorage.removeItem('user') }}>Выйти</button>
             </div>
         </header>
     )

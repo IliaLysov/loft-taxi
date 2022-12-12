@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './modules'
 import { authMiddleware } from './modules/auth'
 
@@ -6,5 +6,7 @@ import { authMiddleware } from './modules/auth'
 
 export const store = createStore(
     rootReducer,
-    applyMiddleware(authMiddleware)
+    compose(
+        applyMiddleware(authMiddleware),
+    )
 )
