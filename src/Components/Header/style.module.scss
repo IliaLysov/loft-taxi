@@ -17,12 +17,14 @@
     font-size: 21px;
     font-weight: 400;
     margin-right: 40px;
+    text-decoration: none;
+    color: white;
     &:last-child {
         margin-right: 0;
     }
 
-    &[data-active='true'] {
-        color: #FDBF5A;
-        pointer-events: none;
-    }
+    // &[data-active='true'] {
+    //     color: #FDBF5A;
+    //     pointer-events: none;
+    // }
 }

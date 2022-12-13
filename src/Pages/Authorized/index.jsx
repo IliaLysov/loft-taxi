@@ -1,38 +1,34 @@
-import React, {useState} from "react"
+import React from "react"
 import css from './style.module.css'
 import {Profile, Order, Map, Header} from '../../Components'
-import { withAuth } from "../../contexts"
+import {PrivateRoute} from '../../PrivateRoute'
+import {Routes, Route, Link} from 'react-router-dom'
 
-function Authorized(events) {
-    const {logOut} = events
-
-    const [currentPage, setPage] = useState('order')
-
-    function clickNavItemFunc(e) {
-        if(e.name === 'out') logOut()
-        else setPage(e.name)
-    }
+function Authorized() {
 
     return (
         <div className={css.wrapper}>
-            <Header currentPage={currentPage} clickNavItem={clickNavItemFunc}/>
+            <Header/>
             <div className={css.container}>
-                {
-                    currentPage === 'profile' && (
-                        <div className={css.windowModal} onClick={() => setPage('order')}>
-                            <div className={css.windowModalContent} onClick={(e)=> e.stopPropagation()}>
-                                <Profile />
+                <Routes>
+                    <Route exact path="/" element={<PrivateRoute/>}>
+                        <Route exact path="/" element={
+                            <div className={css.orderWrapper}>
+                                <Order />
                             </div>
-                        </div>
-                    )
-                }
-                {
-                    currentPage === 'order' && (
-                        <div className={css.orderWrapper}>
-                            <Order />
-                        </div>
-                    )
-                }
+                        } />
+                    </Route>
+                    <Route exact path="/profile" element={<PrivateRoute/>}>
+                        <Route exact path="/profile" element={
+                            <div className={css.windowModal}>
+                                <Link to="/" className={css.windowModalLink}/>
+                                <div className={css.windowModalContent}>
+                                    <Profile />
+                                </div>
+                            </div>
+                        }/>
+                    </Route>
+                </Routes>
                 <div className={css.map}>
                     <Map />
                 </div>
@@ -41,4 +37,4 @@ function Authorized(events) {
     )
 }
 
-export default withAuth(Authorized)
+export default Authorized

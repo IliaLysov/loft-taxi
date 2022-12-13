@@ -1,6 +1,7 @@
 import React from "react"
 import css from './style.module.scss'
 import Input from '@mui/material/Input'
+// import {Link} from 'react-router-dom'
 
 
 function Auth(events) {
@@ -29,7 +30,7 @@ function Auth(events) {
                 {isRegistered
                 &&
                 <div className={css.passportQuestionWrapper}>
-                    <button className={css.passportQuestionBtn}>Забыли пароль?</button>
+                    <button className={css.passportQuestionBtn} onClick={setRegistration}>Забыли пароль?</button>
                 </div>
                 }
             </div>
