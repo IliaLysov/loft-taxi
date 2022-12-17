@@ -12,7 +12,7 @@ function Unauthorized(events) {
 
     if(localStorage.user) {
         const user = JSON.parse(localStorage.user)
-        authentificate(user).catch(err => {alert('не правильный логин или пароль')})
+        authentificate(user)
     }
 
     function send(e){
@@ -21,12 +21,12 @@ function Unauthorized(events) {
         e.target.querySelectorAll('input').forEach(el => send_obj[el.name] = el.value)
 
         if(send_obj.sendType === 'login') {
-            authentificate(send_obj).catch(err => {alert('не правильный логин или пароль')})
+            authentificate(send_obj)
         } else if(send_obj.sendType === 'registration') {
             const [name, surname] = send_obj.name.split(' ')
             send_obj.name = name
             send_obj.surname = surname
-            registration(send_obj).catch(err => {alert('чет не так с регистрацией')})
+            registration(send_obj)
         }
         
     }
