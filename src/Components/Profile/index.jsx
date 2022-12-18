@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import css from './style.module.scss'
 import Input from '@mui/material/Input'
 import cardLogo from '../../images/card-logo.svg'
@@ -6,19 +6,36 @@ import cardChip from '../../images/card-chip.svg'
 import masterCard from '../../images/master-card.svg'
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import { getPayment } from "../../modules/auth"
 
 
 
 function Profile(events) {
 
-    const { send, isPaymentAdded } = events
+    const { send, isPaymentAdded, getPayment, payment } = events
 
+    
+    
     const [cardNumber, setCardNumber] = useState('')
     const [dateCard, setDate] = useState('')
     const [cvcCard, setCVC] = useState('')
+    const [cardName, setCardName] = useState('')
     const [paymentSuccess, setPaymentSuccess] = useState(false)
     
+    
+    useEffect(() => {
+        getPayment()
+
+        setCardNumber(payment.cardNumber)
+        setCVC(payment.cvc)
+        setDate(payment.expiryDate)
+        setCardName(payment.cardName)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    
     const handleCardDisplay = (text) => {
+
         let textTemp = [...text.split(' ').join('')]
         const card = []
 
@@ -59,7 +76,7 @@ function Profile(events) {
         }
     }
 
-    const payment = (e) => {
+    const addPayment = (e) => {
         e.preventDefault()
         send(e)
         setTimeout(() => {
@@ -68,6 +85,7 @@ function Profile(events) {
             }
         }, 1000)
     }
+
     
     return (
         <div className={css.wrapper}>
@@ -76,12 +94,12 @@ function Profile(events) {
             <div className={css.container}>{paymentSuccess ?
                 <Link to="/" className={css.linkBtn}>Перейти на карту</Link>
                 :
-                <form className={css.formWrapper} onSubmit={payment}>
+                <form className={css.formWrapper} onSubmit={addPayment}>
                     <div className={css.formContainer}>
                         <div className={css.form}>
                             <div className={css.inputContainer}>
                                 <label htmlFor="name" className={css.label}>Имя владельца</label>
-                                <Input className={css.input} id="name" type="text" name="name" required/>
+                                <Input className={css.input} id="name" type="text" name="name" value={cardName} onChange={e => setCardName(e.target.value)} required/>
                             </div>
                             <div className={css.inputContainer}>
                                 <label htmlFor="card" className={css.label}>Номер карты</label>
@@ -118,4 +136,4 @@ function Profile(events) {
     )
 }
 
-export default connect(state => ({isPaymentAdded: state.auth.isPaymentAdded}))(Profile)
+export default connect(state => ({isPaymentAdded: state.auth.isPaymentAdded, payment: state.auth.payment}), {getPayment})(Profile)

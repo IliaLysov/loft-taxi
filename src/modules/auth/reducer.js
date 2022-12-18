@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions"
 import { combineReducers } from "redux"
-import { logIn, logOut, addPayment, getAddress } from "./actions"
+import { logIn, logOut, addPayment, getAddress, getRoute, setPayment } from "./actions"
 
 
 const isLoggedIn = handleActions(
@@ -25,9 +25,24 @@ const addresses = handleActions(
     []
 )
 
+const routeCoordinates = handleActions(
+    {
+        [getRoute]: (_state, action) => action.payload
+    },
+    []
+)
+
+const payment = handleActions(
+    {
+        [setPayment]: (_state, action) => action.payload
+    },
+    {}
+)
 
 export default combineReducers({
     isLoggedIn,
     isPaymentAdded,
-    addresses
+    addresses,
+    routeCoordinates,
+    payment
 })
