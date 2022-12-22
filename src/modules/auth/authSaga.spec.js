@@ -2,7 +2,9 @@ import {recordSaga} from './recordSaga'
 import { authentificateSaga } from './authSaga'
 import { authentificate } from './actions'
 
-jest.mock("../../api.js", () => ({serverLogin: jest.fn(() => ({success: true}))}))
+jest.mock("../../api.js", () => ({
+    serverLogin: jest.fn(() => ({success: true, token: 'rechM4ttyHomWbvZR'}))
+}))
 
 describe("authSaga", () => {
     describe("#AUTHENTIFICATE", () => {

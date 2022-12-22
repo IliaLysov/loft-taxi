@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import mapboxGl from 'mapbox-gl'
+// import 'mapbox-gl/dist/mapbox-gl.css'
 import './style.css'
 import { connect } from "react-redux"
 

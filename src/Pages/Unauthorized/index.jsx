@@ -28,7 +28,6 @@ function Unauthorized(events) {
             send_obj.surname = surname
             registration(send_obj)
         }
-        
     }
     
     return (

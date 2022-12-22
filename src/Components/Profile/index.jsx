@@ -12,7 +12,7 @@ import { getPayment } from "../../modules/auth"
 
 function Profile(events) {
 
-    const { send, isPaymentAdded, getPayment, payment } = events
+    const { send, isPaymentAdded, getPayment } = events
 
     
     
@@ -22,30 +22,43 @@ function Profile(events) {
     const [cardName, setCardName] = useState('')
     const [paymentSuccess, setPaymentSuccess] = useState(false)
     
-    
+
     useEffect(() => {
         getPayment()
-
-        setCardNumber(payment.cardNumber)
-        setCVC(payment.cvc)
-        setDate(payment.expiryDate)
-        setCardName(payment.cardName)
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
+    const payment = localStorage.payment
+    
+    useEffect(() => {
+        if(payment) {
+            const paymentData = JSON.parse(localStorage.payment)
+            setCardNumber(paymentData.cardNumber)
+            setCVC(paymentData.cvc)
+            setDate(paymentData.expiryDate)
+            setCardName(paymentData.cardName)
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [payment])
+    
     const handleCardDisplay = (text) => {
+
+        console.log(text.substring(3, 8))
 
         let textTemp = [...text.split(' ').join('')]
         const card = []
 
+        
         textTemp.forEach((t, i) => {
-            if (i % 4 === 0) {
-                if (i !== 0) {
-                    card.push(' ')
+            
+            if (!isNaN(t)) {
+                if (i % 4 === 0) {
+                    if (i !== 0) {
+                        card.push(' ')
+                    }
                 }
+                card.push(t)
             }
-            card.push(t)
         })
 
         if (card.length <= 19) {
@@ -64,14 +77,15 @@ function Profile(events) {
             } else if (dateCard.length === 1) {
                 textTemp += '/'
             }
-        } 
-        if (textTemp.length <= 5) {
+        }
+        
+        if (textTemp.length <= 5 && !isNaN(textTemp.substring(3, 5))) {
             setDate(textTemp)
         }
     }
 
     const handleCVC = (text) => {
-        if (text.length <= 3) {
+        if (text.length <= 3 && !isNaN(text)) {
             setCVC(text)
         }
     }
@@ -136,4 +150,4 @@ function Profile(events) {
     )
 }
 
-export default connect(state => ({isPaymentAdded: state.auth.isPaymentAdded, payment: state.auth.payment}), {getPayment})(Profile)
+export default connect(state => ({isPaymentAdded: state.auth.isPaymentAdded}), {getPayment})(Profile)
