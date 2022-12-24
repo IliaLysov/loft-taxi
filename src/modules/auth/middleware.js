@@ -1,11 +1,11 @@
 import {logIn} from './'
 import { serverLogin, serverRegistration } from '../../api'
-import { authentificate, registration } from './'
+import { authenticate, registration } from './'
 
 
 
 export const authMiddleware = store => next => async action => {
-    if(action.type === authentificate.toString()) {
+    if(action.type === authenticate.toString()) {
         const {email, password} = action.payload
         const response = await serverLogin(email, password)
         if(response.success){

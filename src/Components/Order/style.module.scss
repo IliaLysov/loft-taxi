@@ -1,3 +1,29 @@
 .instructions {
     font-size: 21px;
 }
+
+.container {
+    width: 300px;
+    margin-bottom: 30px;
+}
+
+.input {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #E4E4E4;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.callBtn {
+    height: 61px;
+    width: 100%;
+    background: #FDBF5A;
+    border-radius: 70px;
+    font-weight: 400;
+    font-size: 25px;
+    border: none;
+    &:hover {
+        background: #FFA842;
+    }
+}

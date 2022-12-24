@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "formic": "^0.0.10",
     "loft-taxi-mui-theme": "^1.2.0",
     "mapbox-gl": "^2.11.0",
     "node-sass": "^8.0.0",
@@ -20,7 +21,7 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
     "redux-actions": "^2.6.5",
-    "redux-saga": "^1.2.2",
+    "redux-saga": "1.2.2",
     "reselect": "^4.1.7",
     "web-vitals": "^2.1.4"
   },

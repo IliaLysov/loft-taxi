@@ -1,14 +1,12 @@
 import {takeEvery, call, put} from 'redux-saga/effects'
 import { serverLogin, serverRegistration, serverPayment, serverAddress, serverRoute, serverGetPayment } from '../../api'
-import { authentificate, logIn, registration, payment, addPayment, address, getAddress, route, getRoute, getPayment } from './'
+import { authenticate, logIn, registration, payment, addPayment, address, getAddress, route, getRoute } from '.'
 
-export function* authentificateSaga(action) {
+export function* authenticateSaga(action) {
     const {email, password} = action.payload
     const response = yield call(serverLogin, email, password)
     console.log(response)
     if(response.success){
-
-
         const responsePayment = yield call(serverGetPayment, response.token)
         if (responsePayment.id) {
             console.log(responsePayment)
@@ -20,7 +18,6 @@ export function* authentificateSaga(action) {
                 expiryDate: responsePayment.expiryDate
             })
         }
-
         yield put(logIn())
         localStorage.user = JSON.stringify({
             email: email,
@@ -30,21 +27,6 @@ export function* authentificateSaga(action) {
 
     } else if(response.error) {
         alert(response.error)
-    }
-}
-
-export function* getPaymentSaga() {
-    const {token} = JSON.parse(localStorage.user)
-    const response = yield call(serverGetPayment, token)
-    console.log(response)
-    if (response.id) {
-        yield put(addPayment())
-        localStorage.payment = JSON.stringify({
-            cardName: response.cardName,
-            cardNumber: response.cardNumber,
-            cvc: response.cvc,
-            expiryDate: response.expiryDate
-        })
     }
 }
 
@@ -101,10 +83,9 @@ export function* routeSaga(action) {
 
 
 export function* Sagas() {
-    yield takeEvery(authentificate.toString(), authentificateSaga)
+    yield takeEvery(authenticate.toString(), authenticateSaga)
     yield takeEvery(registration.toString(), registrationSaga)
     yield takeEvery(payment.toString(), paymentSaga)
     yield takeEvery(address.toString(), addressSaga)
     yield takeEvery(route.toString(), routeSaga)
-    yield takeEvery(getPayment.toString(), getPaymentSaga)
 }

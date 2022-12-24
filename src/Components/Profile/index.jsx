@@ -6,13 +6,12 @@ import cardChip from '../../images/card-chip.svg'
 import masterCard from '../../images/master-card.svg'
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
-import { getPayment } from "../../modules/auth"
 
 
 
 function Profile(events) {
 
-    const { send, isPaymentAdded, getPayment } = events
+    const { send, isPaymentAdded } = events
 
     
     
@@ -22,17 +21,12 @@ function Profile(events) {
     const [cardName, setCardName] = useState('')
     const [paymentSuccess, setPaymentSuccess] = useState(false)
     
-
-    useEffect(() => {
-        getPayment()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
     
     const payment = localStorage.payment
     
     useEffect(() => {
         if(payment) {
-            const paymentData = JSON.parse(localStorage.payment)
+            const paymentData = JSON.parse(payment)
             setCardNumber(paymentData.cardNumber)
             setCVC(paymentData.cvc)
             setDate(paymentData.expiryDate)
@@ -42,9 +36,6 @@ function Profile(events) {
     }, [payment])
     
     const handleCardDisplay = (text) => {
-
-        console.log(text.substring(3, 8))
-
         let textTemp = [...text.split(' ').join('')]
         const card = []
 
@@ -150,4 +141,4 @@ function Profile(events) {
     )
 }
 
-export default connect(state => ({isPaymentAdded: state.auth.isPaymentAdded}), {getPayment})(Profile)
+export default connect(state => ({isPaymentAdded: state.auth.isPaymentAdded}))(Profile)

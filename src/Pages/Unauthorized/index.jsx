@@ -2,17 +2,17 @@ import React, {useState} from "react"
 import './style.css'
 import {Auth} from '../../Components'
 import logo_img from '../../images/logo.svg'
-import {authentificate, registration} from '../../modules/auth'
+import {authenticate, registration} from '../../modules/auth'
 import { connect } from "react-redux"
 
 function Unauthorized(events) {
-    const {authentificate, registration} = events
+    const {authenticate, registration} = events
 
     const [isRegistered, setRegistration] = useState(true)
 
     if(localStorage.user) {
         const user = JSON.parse(localStorage.user)
-        authentificate(user)
+        authenticate(user)
     }
 
     function send(e){
@@ -21,7 +21,7 @@ function Unauthorized(events) {
         e.target.querySelectorAll('input').forEach(el => send_obj[el.name] = el.value)
 
         if(send_obj.sendType === 'login') {
-            authentificate(send_obj)
+            authenticate(send_obj)
         } else if(send_obj.sendType === 'registration') {
             const [name, surname] = send_obj.name.split(' ')
             send_obj.name = name
@@ -44,4 +44,4 @@ function Unauthorized(events) {
     )
 }
 
-export default connect(state => ({isLoggedIn: state.auth.isLoggedIn}), {authentificate, registration})(Unauthorized);
+export default connect(state => ({isLoggedIn: state.auth.isLoggedIn}), {authenticate, registration})(Unauthorized);
