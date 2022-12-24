@@ -16,9 +16,10 @@ function Unauthorized(events) {
     }
 
     function send(e){
-        e.preventDefault()
-        let send_obj = {sendType: isRegistered ? 'login' : 'registration'}
-        e.target.querySelectorAll('input').forEach(el => send_obj[el.name] = el.value)
+        // e.preventDefault()
+        let send_obj = e
+        send_obj.sendType = isRegistered ? 'login' : 'registration'
+        // e.target.querySelectorAll('input').forEach(el => send_obj[el.name] = el.value)
 
         if(send_obj.sendType === 'login') {
             authenticate(send_obj)
