@@ -43,20 +43,20 @@ function Auth(events) {
                         <div className={css.inputContainer}>
                             <div className={css.inputWrapper}>
                                 <label htmlFor="email" className={css.label}>Email</label>
-                                <Field type="email" name="email" component={InputWrapper}/>
+                                <Field type="email" name="email" id="email" component={InputWrapper}/>
                                 <ErrorMessage name="email"/>
                             </div>
                             {!isRegistered
                             &&
                             <div className={css.inputWrapper}>
                                 <label className={css.label} htmlFor="name">Как вас зовут?*</label>
-                                <Field type="text" name="name" component={InputWrapper}/>
+                                <Field type="text" name="name" id="name" component={InputWrapper}/>
                                 <ErrorMessage name="name"/>
                             </div>
                             }
                             <div className={css.inputWrapper}>
                                 <label className={css.label} htmlFor="password">Password</label>
-                                <Field type="password" name="password" component={InputWrapper}/>
+                                <Field type="password" name="password" id="password" component={InputWrapper}/>
                                 <ErrorMessage name="password"/>
                             </div>
                             {isRegistered
@@ -66,7 +66,7 @@ function Auth(events) {
                             </div>
                             }
                         </div>
-                        <input className={css.entryBtn} type="submit" value={isRegistered ? "Войти" : "Зарегистрироваться"} />
+                        <input className={css.entryBtn} type="submit" id="submitButton" value={isRegistered ? "Войти" : "Зарегистрироваться"} />
                         <div className={css.registrationWrapper}>
                             <div className={css.registrationQuestion}>{isRegistered ? "Новый пользователь?" : "Уже зарегистрированы?"}</div>
                             <button className={css.registrationBtn} onClick={setRegistration}>{isRegistered ? "Регистрация" : "Войти"}</button>
