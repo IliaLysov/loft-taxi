@@ -7,6 +7,7 @@ import { connect } from "react-redux"
 
 function Header(events) {
     const {logOut} = events
+    const removeObjects = ['user', 'payment']
 
     return (
         <header className={css.header}>
@@ -14,7 +15,7 @@ function Header(events) {
             <div className={css.navigation}>
                 <NavLink to="/" className={css.nav}>Карта</NavLink>
                 <NavLink to="/profile" className={css.nav}>Профиль</NavLink>
-                <button className={css.nav} onClick={() => {logOut(); localStorage.removeItem('user') }}>Выйти</button>
+                <button className={css.nav} onClick={() => {logOut(); removeObjects.forEach(e => localStorage.removeItem(e))}}>Выйти</button>
             </div>
         </header>
     )
