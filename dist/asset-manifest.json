@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "./static/css/main.ff673ef1.css",
+    "main.js": "./static/js/main.45891125.js",
+    "static/js/787.0b092cc9.chunk.js": "./static/js/787.0b092cc9.chunk.js",
+    "static/media/map.png": "./static/media/map.15bef711aae77ed45984.png",
+    "static/media/logo.svg": "./static/media/logo.14346112c2e448417e51613c5abdc65c.svg",
+    "static/media/logo-mini.svg": "./static/media/logo-mini.b62304ff3b4470950e0cfe664bfa2148.svg",
+    "static/media/card-logo.svg": "./static/media/card-logo.860ed155ecbf2ada9b0afed3a4472f4a.svg",
+    "index.html": "./index.html",
+    "static/media/card-chip.svg": "./static/media/card-chip.c84e78516ea2acc7fa0373212a388630.svg",
+    "static/media/master-card.svg": "./static/media/master-card.11ada678ce5a721e6616f97159aeb108.svg",
+    "main.ff673ef1.css.map": "./static/css/main.ff673ef1.css.map",
+    "main.45891125.js.map": "./static/js/main.45891125.js.map",
+    "787.0b092cc9.chunk.js.map": "./static/js/787.0b092cc9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff673ef1.css",
+    "static/js/main.45891125.js"
+  ]
+}
