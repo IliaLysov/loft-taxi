@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
-import mapboxGl from 'mapbox-gl'
+
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import mapboxGl from '!mapbox-gl'
 // import 'mapbox-gl/dist/mapbox-gl.css'
 import './style.css'
 import { connect } from "react-redux"
