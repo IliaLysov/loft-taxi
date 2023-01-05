@@ -100,7 +100,7 @@ function Profile(events) {
             <h1 className={css.profileTitle}>Profile</h1>
             <div className={css.description}>{paymentStatus ? 'Payment details have been updated. Now you can order a taxi' : 'Enter payment details'}</div>
             <div className={css.container}>{paymentStatus ?
-                <Link to="/" className={css.linkBtn}>Go to map</Link>
+                <Link to="/loft-taxi/dist/" className={css.linkBtn}>Go to map</Link>
                 :
                 <form className={css.formWrapper} onSubmit={setPayment}>
                     <div className={css.formContainer}>
