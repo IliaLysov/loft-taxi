@@ -12,7 +12,7 @@ describe('test sagas', () => {
     }
     describe('test authenticateSaga', () => {
         const gen = authenticateSaga(authenticate(user))
-    
+        
         it('calls serverLogin', () => {
             expect(gen.next().value).toEqual(call(serverLogin, user.email, user.password))
         })
@@ -31,7 +31,7 @@ describe('test sagas', () => {
                 id: 'testid'
             }
     
-            expect(gen.next(responsePayment).value).toEqual(put(addPayment()))
+            expect(gen.next(responsePayment).value).toEqual(put(addPayment(true)))
         })
     
         it('dispatch logIn', () => {

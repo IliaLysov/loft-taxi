@@ -6,25 +6,23 @@ import cardChip from '../../images/card-chip.svg'
 import masterCard from '../../images/master-card.svg'
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import { setPaymentStatus, addPayment } from "../../modules/auth"
 
 
 
 function Profile(events) {
 
-    const { send, isPaymentAdded } = events
+    const { send, paymentStatus, setPaymentStatus, addPayment } = events
 
-    
-    
     const [cardNumber, setCardNumber] = useState('')
     const [dateCard, setDate] = useState('')
     const [cvcCard, setCVC] = useState('')
-    const [cardName, setCardName] = useState('')
-    const [paymentSuccess, setPaymentSuccess] = useState(false)
-    
+    const [cardName, setCardName] = useState('')    
     
     const payment = localStorage.payment
-    
+
     useEffect(() => {
+        setPaymentStatus(false)
         if(payment) {
             const paymentData = JSON.parse(payment)
             setCardNumber(paymentData.cardNumber)
@@ -33,7 +31,8 @@ function Profile(events) {
             setCardName(paymentData.cardName)
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [payment])
+    }, [])
+
     
     const handleCardDisplay = (text) => {
         let textTemp = [...text.split(' ').join('')]
@@ -81,33 +80,37 @@ function Profile(events) {
         }
     }
 
-    const addPayment = (e) => {
+    const setPayment = (e) => {
         e.preventDefault()
         send(e)
-        setTimeout(() => {
-            if (isPaymentAdded) {
-                setPaymentSuccess(true)
-            }
-        }, 1000)
+    }
+
+    const cleanForm = () => {
+        localStorage.removeItem('payment')
+        addPayment(false)
+        setCardNumber('')
+        setCVC('')
+        setDate('')
+        setCardName('')
     }
 
     
     return (
         <div className={css.wrapper}>
-            <h1 className={css.profileTitle}>Профиль</h1>
-            <div className={css.description}>{paymentSuccess ? 'Платёжные данные обновлены. Теперь вы можете заказывать такси' : 'Введите платежные данные'}</div>
-            <div className={css.container}>{paymentSuccess ?
-                <Link to="/" className={css.linkBtn}>Перейти на карту</Link>
+            <h1 className={css.profileTitle}>Profile</h1>
+            <div className={css.description}>{paymentStatus ? 'Payment details have been updated. Now you can order a taxi' : 'Enter payment details'}</div>
+            <div className={css.container}>{paymentStatus ?
+                <Link to="/" className={css.linkBtn}>Go to map</Link>
                 :
-                <form className={css.formWrapper} onSubmit={addPayment}>
+                <form className={css.formWrapper} onSubmit={setPayment}>
                     <div className={css.formContainer}>
                         <div className={css.form}>
                             <div className={css.inputContainer}>
-                                <label htmlFor="name" className={css.label}>Имя владельца</label>
+                                <label htmlFor="name" className={css.label}>Owner's name</label>
                                 <Input className={css.input} id="name" type="text" name="name" value={cardName} onChange={e => setCardName(e.target.value)} required/>
                             </div>
                             <div className={css.inputContainer}>
-                                <label htmlFor="card" className={css.label}>Номер карты</label>
+                                <label htmlFor="card" className={css.label}>Card number</label>
                                 <Input className={css.input} id="card" type="text" value={cardNumber}  placeholder="XXXX XXXX XXXX XXXX" name="card" required onChange={(e) => handleCardDisplay(e.target.value)}/>
                             </div>
                             <div className={css.inputWrapper}>
@@ -133,7 +136,8 @@ function Profile(events) {
                             </div>
                         </div>
                     </div>
-                    <input type="submit" className={css.saveBtn} value="Сохранить"/>
+                    <div className={css.cleanBtn} onClick={() => cleanForm()}>Clean form</div>
+                    <input type="submit" className={css.saveBtn} value="Save"/>
                 </form>
             }
             </div>
@@ -141,4 +145,4 @@ function Profile(events) {
     )
 }
 
-export default connect(state => ({isPaymentAdded: state.auth.isPaymentAdded}))(Profile)
+export default connect(state => ({paymentStatus: state.auth.paymentStatus}), {setPaymentStatus, addPayment})(Profile)

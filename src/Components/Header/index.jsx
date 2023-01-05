@@ -7,15 +7,21 @@ import { connect } from "react-redux"
 
 function Header(events) {
     const {logOut} = events
-    const removeObjects = ['user', 'payment']
+    const isOffline = JSON.parse(localStorage.isOffline)
+    let removeObjects = []
+    if (isOffline) {
+        removeObjects = ['user']
+    } else {
+        removeObjects = ['user', 'payment']
+    }
 
     return (
         <header className={css.header}>
             <img className={css.logo} src={logo_img} alt="logo" />
             <div className={css.navigation}>
-                <NavLink to="/" className={css.nav}>Карта</NavLink>
-                <NavLink to="/profile" className={css.nav}>Профиль</NavLink>
-                <button className={css.nav} onClick={() => {logOut(); removeObjects.forEach(e => localStorage.removeItem(e))}}>Выйти</button>
+                <NavLink to="/" className={css.nav}>Map</NavLink>
+                <NavLink to="/profile" className={css.nav}>Profile</NavLink>
+                <button className={css.nav} onClick={() => {logOut(); removeObjects.forEach(e => localStorage.removeItem(e)); window.location.reload(false)}}>Log out</button>
             </div>
         </header>
     )

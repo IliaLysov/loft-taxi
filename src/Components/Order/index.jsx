@@ -3,12 +3,12 @@ import css from "./style.module.scss"
 import { connect } from "react-redux"
 import Autocomplete from "@mui/material/Autocomplete"
 import TextField from "@mui/material/TextField"
-import { address, route } from "../../modules/auth"
+import { address, route, setRouteStatus } from "../../modules/auth"
 
 
 function Order(events) {
 
-    const {isPaymentAdded, address, addresses, route} = events
+    const {isPaymentAdded, address, addresses, route, setRouteStatus, routeStatus} = events
 
     const [selected, setSelected] = useState({from: {}, to: {}}) //выбранные
     const [fromOffers, setFromOffers] = useState([])
@@ -22,15 +22,11 @@ function Order(events) {
 
     useEffect(() => {
         if (addresses) {
-            let copyNotSelected = []
-            addresses.forEach(address => {
-                copyNotSelected.push(address)
-            })
-            setFromOffers(copyNotSelected)
-            setToOffers(copyNotSelected)
+            setFromOffers(addresses)
+            setToOffers(addresses)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [addresses])
+    }, [addresses, routeStatus])
 
     const select = (current, direction) => {
         let copySelect = {...selected}
@@ -59,35 +55,40 @@ function Order(events) {
 
     return (
         <div className={css.wrapper}>{isPaymentAdded 
-            ?
-            <form className={css.form} onSubmit={routeAddress}>
-                <div className={css.container}>
-                    <Autocomplete
-                    className={css.input}
-                    disablePortal
-                    id="from"
-                    options={fromOffers}
-                    onChange={(event, value) => select(value, event.target.id.split('-')[0])}
-                    filterSelectedOptions
-                    renderInput={(params) => <TextField {...params} label="From" />}
-                     />
-                    <Autocomplete
-                    className={css.input}
-                    disablePortal
-                    id="to"
-                    options={toOffers}
-                    onChange={(event, value) => select(value, event.target.id.split('-')[0])}
-                    filterSelectedOptions
-                    renderInput={(params) => <TextField {...params} label="To" />}
-                     />
-                </div>
-                <input className={css.callBtn} type="submit" value="Вызвать такси" />
-            </form>
+            ? !routeStatus
+                ?    <form className={css.form} onSubmit={e => routeAddress(e)}>
+                        <div className={css.container}>
+                            <Autocomplete
+                            className={css.input}
+                            disablePortal
+                            id="from"
+                            options={fromOffers}
+                            onChange={(event, value) => select(value, event.target.id.split('-')[0])}
+                            filterSelectedOptions
+                            renderInput={(params) => <TextField {...params} label="From" required/>}
+                            />
+                            <Autocomplete
+                            className={css.input}
+                            disablePortal
+                            id="to"
+                            options={toOffers}
+                            onChange={(event, value) => select(value, event.target.id.split('-')[0])}
+                            filterSelectedOptions
+                            renderInput={(params) => <TextField {...params} label="To" required/>}
+                            />
+                        </div>
+                        <input className={css.callBtn} type="submit" value="Call a taxi" />
+                    </form>
+                :   <div className={css.routeSuccess}>
+                        <h1 className={css.title}>Order placed</h1>
+                        <div className={css.description}>Your taxi is already on its way to you. Will arrive in about 10 minutes.</div>
+                        <button className={css.callBtn} onClick={() => setRouteStatus(false)}>Make a new order</button>
+                    </div>
             :
-            <div className={css.instructions}>Перейдите в профиль и введите данные карты</div>
+            <div className={css.instructions}>Go to profile and enter card details</div>
         }
         </div>
     )
 }
 
-export default  connect(state => ({isPaymentAdded: state.auth.isPaymentAdded, addresses: state.auth.addresses, routeCoordinates: state.auth.routeCoordinates}), {address, route})(Order)
+export default  connect(state => ({isPaymentAdded: state.auth.isPaymentAdded, addresses: state.auth.addresses, routeCoordinates: state.auth.routeCoordinates, routeStatus: state.auth.routeStatus}), {address, route, setRouteStatus})(Order)

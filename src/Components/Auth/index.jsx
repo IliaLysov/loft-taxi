@@ -1,17 +1,26 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import css from './style.module.scss'
-import Input from '@mui/material/Input'
-// import {Link} from 'react-router-dom'
+import { Switch, Input } from "@mui/material"
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
+import { serverStatus } from "../../modules/auth"
+import { connect } from "react-redux"
 
 
 
 
 function Auth(events) {
     
-    const {isRegistered, setRegistration, send} = events
-    
+    const {isRegistered, setRegistration, send, serverStatus} = events
+
+    const [isOffline, setIsOffline] = useState(false)
+
+    useEffect(() => {
+        if (localStorage.isOffline) {
+            setIsOffline(JSON.parse(localStorage.isOffline))
+        }
+    }, [])
+
     const SignupSchema = Yup.object().shape({
         name: !isRegistered && Yup.string()
             .min(2, 'Too Short!')
@@ -39,7 +48,7 @@ function Auth(events) {
             {({ handleSubmit, touched, errors }) => {
                 return (
                     <Form onSubmit={handleSubmit} className={css.form}>
-                        <div className={css.header}>Войти</div>
+                        <div className={css.header}>Log in</div>
                         <div className={css.inputContainer}>
                             <div className={css.inputWrapper}>
                                 <label htmlFor="email" className={css.label}>Email</label>
@@ -49,7 +58,7 @@ function Auth(events) {
                             {!isRegistered
                             &&
                             <div className={css.inputWrapper}>
-                                <label className={css.label} htmlFor="name">Как вас зовут?*</label>
+                                <label className={css.label} htmlFor="name">What is your name?*</label>
                                 <Field type="text" name="name" id="name" component={InputWrapper}/>
                                 <ErrorMessage name="name"/>
                             </div>
@@ -62,53 +71,24 @@ function Auth(events) {
                             {isRegistered
                             &&
                             <div className={css.passportQuestionWrapper}>
-                                <button className={css.passportQuestionBtn} onClick={setRegistration}>Забыли пароль?</button>
+                                <div className={css.serverWrapper}>
+                                    <label className={css.serverLabel} htmlFor="server">{isOffline ? "Offline" : "Online"}</label>
+                                    <Switch name="server" checked={isOffline} onChange={e => {serverStatus(e.target.checked); setIsOffline(e.target.checked)}}/>
+                                </div>
+                                <button className={css.passportQuestionBtn} onClick={setRegistration}>Forgot your password?</button>
                             </div>
                             }
                         </div>
-                        <input className={css.entryBtn} type="submit" id="submitButton" value={isRegistered ? "Войти" : "Зарегистрироваться"} />
+                        <input className={css.entryBtn} type="submit" id="submitButton" value={isRegistered ? "Log in" : "Register"} />
                         <div className={css.registrationWrapper}>
-                            <div className={css.registrationQuestion}>{isRegistered ? "Новый пользователь?" : "Уже зарегистрированы?"}</div>
-                            <button className={css.registrationBtn} onClick={setRegistration}>{isRegistered ? "Регистрация" : "Войти"}</button>
+                            <div className={css.registrationQuestion}>{isRegistered ? "New user?" : "Already registered?"}</div>
+                            <button className={css.registrationBtn} onClick={setRegistration}>{isRegistered ? "Register" : "Log in"}</button>
                         </div>
                     </Form>
                 );
             }}
         </Formik>
-        
-
-        // <form className={css.form} onSubmit={send}>
-        //     <div className={css.header}>{isRegistered ? 'Войти' : 'Регистрация'}</div>
-        //     <div className={css.inputContainer}>
-        //         <div className={css.inputWrapper}>
-        //             <label htmlFor="email" className={css.label}>Email</label>
-        //             <Input className={css.input} id="email" type="email" required name="email" />
-        //         </div>
-        //         {!isRegistered
-        //         &&
-        //         <div className={css.inputWrapper}>
-        //             <label className={css.label} htmlFor="name">Как вас зовут?*</label>
-        //             <Input className={css.input} id="name" type="text" name="name" />
-        //         </div>
-        //         }
-        //         <div className={css.inputWrapper}>
-        //             <label className={css.label} htmlFor="password">Password</label>
-        //             <Input className={css.input} id="password" type="password" required name="password" />
-        //         </div>
-        //         {isRegistered
-        //         &&
-        //         <div className={css.passportQuestionWrapper}>
-        //             <button className={css.passportQuestionBtn} onClick={setRegistration}>Забыли пароль?</button>
-        //         </div>
-        //         }
-        //     </div>
-        //     <input className={css.entryBtn} type="submit" value={isRegistered ? "Войти" : "Зарегистрироваться"} />
-        //     <div className={css.registrationWrapper}>
-        //         <div className={css.registrationQuestion}>{isRegistered ? "Новый пользователь?" : "Уже зарегистрированы?"}</div>
-        //         <button className={css.registrationBtn} onClick={setRegistration}>{isRegistered ? "Регистрация" : "Войти"}</button>
-        //     </div>
-        // </form>
     )
 }
 
-export default Auth
+export default connect(state => ({}), {serverStatus})(Auth)
