@@ -19,8 +19,8 @@ function Header(events) {
         <header className={css.header}>
             <img className={css.logo} src={logo_img} alt="logo" />
             <div className={css.navigation}>
-                <NavLink to="/" className={css.nav}>Map</NavLink>
-                <NavLink to="/profile" className={css.nav}>Profile</NavLink>
+                <NavLink to="/loft-taxi/dist/" className={css.nav}>Map</NavLink>
+                <NavLink to="/loft-taxi/dist/profile" className={css.nav}>Profile</NavLink>
                 <button className={css.nav} onClick={() => {logOut(); removeObjects.forEach(e => localStorage.removeItem(e)); window.location.reload(false)}}>Log out</button>
             </div>
         </header>

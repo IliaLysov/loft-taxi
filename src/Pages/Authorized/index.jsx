@@ -23,17 +23,17 @@ function Authorized(events) {
             <Header/>
             <div className={css.container}>
                 <Routes>
-                    <Route exact path="/" element={<PrivateRoute/>}>
-                        <Route exact path="/" element={
+                    <Route exact path="/loft-taxi/dist/" element={<PrivateRoute/>}>
+                        <Route exact path="/loft-taxi/dist/" element={
                             <div className={css.orderWrapper}>
                                 <Order />
                             </div>
                         } />
                     </Route>
-                    <Route exact path="/profile" element={<PrivateRoute/>}>
-                        <Route exact path="/profile" element={
+                    <Route exact path="/loft-taxi/dist/profile" element={<PrivateRoute/>}>
+                        <Route exact path="/loft-taxi/dist/profile" element={
                             <div className={css.windowModal}>
-                                <Link to="/" className={css.windowModalLink}/>
+                                <Link to="/loft-taxi/dist/" className={css.windowModalLink}/>
                                 <div className={css.windowModalContent}>
                                     <Profile send={send}/>
                                 </div>
