@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/loft-taxi/dist/static/css/main.1c67e294.css",
-    "main.js": "/loft-taxi/dist/static/js/main.7d9cb2b6.js",
+    "main.js": "/loft-taxi/dist/static/js/main.a842b9bb.js",
     "static/js/787.0b092cc9.chunk.js": "/loft-taxi/dist/static/js/787.0b092cc9.chunk.js",
     "static/media/map.png": "/loft-taxi/dist/static/media/map.15bef711aae77ed45984.png",
     "static/media/logo.svg": "/loft-taxi/dist/static/media/logo.14346112c2e448417e51613c5abdc65c.svg",
@@ -11,11 +11,11 @@
     "static/media/card-chip.svg": "/loft-taxi/dist/static/media/card-chip.c84e78516ea2acc7fa0373212a388630.svg",
     "static/media/master-card.svg": "/loft-taxi/dist/static/media/master-card.11ada678ce5a721e6616f97159aeb108.svg",
     "main.1c67e294.css.map": "/loft-taxi/dist/static/css/main.1c67e294.css.map",
-    "main.7d9cb2b6.js.map": "/loft-taxi/dist/static/js/main.7d9cb2b6.js.map",
+    "main.a842b9bb.js.map": "/loft-taxi/dist/static/js/main.a842b9bb.js.map",
     "787.0b092cc9.chunk.js.map": "/loft-taxi/dist/static/js/787.0b092cc9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1c67e294.css",
-    "static/js/main.7d9cb2b6.js"
+    "static/js/main.a842b9bb.js"
   ]
 }
