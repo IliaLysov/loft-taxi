@@ -49,4 +49,4 @@ function Authorized(events) {
     )
 }
 
-export default connect(state => ({isPaymentAdded: state.auth.isPaymentAdded}), {payment})(Authorized)
+export default connect(state => ({}), {payment})(Authorized)

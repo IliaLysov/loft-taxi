@@ -17,44 +17,54 @@ class Map extends Component {
         this.map = new mapboxGl.Map({
             container: this.mapContainer.current,
             style: 'mapbox://styles/mapbox/light-v11',
-            center: [41.650458, 41.630216],
+            center: [30.299499, 59.898466],
             zoom: 10
         })
         
     }
     
     componentDidUpdate() {
-        const {routeCoordinates} = this.props
+        const {routeCoordinates, routeStatus} = this.props
+
+        // const routeCenter = routeCoordinates[routeCoordinates.length-1].map((e, i) => (e + routeCoordinates[0][i])/2)
         
         this.map.flyTo({
             center: routeCoordinates[0],
-            zoom: 15
+            zoom: 14
         })
 
-        this.map.addLayer({
-            id: "route",
-            type: "line",
-            source: {
-              type: "geojson",
-              data: {
-                type: "Feature",
-                properties: {},
-                geometry: {
-                  type: "LineString",
-                  coordinates: routeCoordinates
+        if (routeStatus) {
+          this.map.addLayer({
+              id: "route",
+              type: "line",
+              source: {
+                type: "geojson",
+                data: {
+                  type: "Feature",
+                  properties: {},
+                  geometry: {
+                    type: "LineString",
+                    coordinates: routeCoordinates
+                  }
                 }
+              },
+              layout: {
+                "line-join": "round",
+                "line-cap": "round"
+              },
+              paint: {
+                "line-color": "#ffc617",
+                "line-width": 8
               }
-            },
-            layout: {
-              "line-join": "round",
-              "line-cap": "round"
-            },
-            paint: {
-              "line-color": "#ffc617",
-              "line-width": 8
-            }
-        })
-        
+          })
+        } else {
+          if (this.map.getLayer("route")) {
+            this.map.removeLayer("route")
+          }
+          if (this.map.getSource("route")) {
+            this.map.removeSource("route")
+          }
+        }
     }
 
     componentWillUnmount() {
@@ -68,4 +78,4 @@ class Map extends Component {
     }
 }
 
-export default connect(state => ({routeCoordinates: state.auth.routeCoordinates}))(Map)
+export default connect(state => ({routeCoordinates: state.auth.routeCoordinates, routeStatus: state.auth.routeStatus}))(Map)
