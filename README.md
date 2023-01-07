@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Taxi app client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**[Application](https://lisovilya.github.io/loft-taxi/dist/)**
 
-## Available Scripts
+> Since the course server is not stable, the ability to log in `offline` has been added.
+> 
+> [Toggle switch to go offline](/src/images/offlineFeatureA.png)
 
-In the project directory, you can run:
+| Login | Password |
+| ----- | -------- |
+| test@test.com | 123123 |
 
-### `npm start`
+[**Example application provided by the course**](https://boring-mcclintock-9267da.netlify.com/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Description
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+With this application, you can [create an account](/src/images/registrationPage.jpg) or [log into](/src/images/authPage.jpg) an existing one, [add credit card details](/src/images/profilePage.jpg) and [build a route](/src/images/routePage.jpg) from the [addresses](/src/images/addressesPage.jpg) provided by the [server](https://loft-taxi.glitch.me/)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Core technologies
 
-### `npm run build`
+- [React.js](https://reactjs.org/docs/getting-started.html)
+- [React-redux](https://react-redux.js.org/)
+- [React-router-dom](https://reactrouter.com/en/main)
+- [CRA](https://create-react-app.dev/)
+- [Redux-saga](https://redux-saga.js.org/)
+- [Redux-actions](https://redux-actions.js.org/api/createaction)
+- [Formik](https://formik.org/)
+- [Sass](https://sass-lang.com/)
+- [Jest](https://jestjs.io/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**[Server](https://loft-taxi.glitch.me/)**
+is used for authorization, saving credit card details, getting available addresses and routes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Available requests: 
+- `/auth` - log in
+- `/register` - registration
+- `/addressList` - returns a list of available addresses
+- `/route` - returns an array of coordinates for the route
 
-### `npm run eject`
+## Map
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[Mapbox](https://www.mapbox.com/) service was used to work with the map. Using the [Mapbox GL](https://www.mapbox.com/mapbox-gljs) library, the map is displayed in the application and the route is built based on it
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[Mapbox GL JS documentation](https://docs.mapbox.com/mapbox-gl-js/api/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+> For the service to work, you need to register, get a [token](https://docs.mapbox.com/help/getting-started/access-tokens/) and add it to the map component
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```js
+//src/Comonents/Map/index.jsx
 
-## Learn More
+mapboxGl.accessToken = mapboxToken
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Style
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Material-ui](https://mui.com/) library was used to style many elements. The colors and appearance of inputs, buttons and links are overridden by the [loft-taxi-mui-theme](https://github.com/satansdeer/loft-taxi-mui-theme) package
 
-### Code Splitting
+## Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Clone repository
+```
+git clone https://github.com/LisovIlya/loft-taxi
+```
 
-### Analyzing the Bundle Size
+### Installing modules
+```
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Start development mode
+```
+npm run start
+```
 
-### Making a Progressive Web App
+### Create a production app in the `/dist` folder
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+npm run build
+```

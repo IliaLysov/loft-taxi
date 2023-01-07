@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { mapboxToken } from '../../tokens'
 
 // @ts-ignore
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -15,7 +16,7 @@ class Map extends Component {
 
     componentDidMount() {
 
-        mapboxGl.accessToken = "pk.eyJ1IjoibGlzb3YiLCJhIjoiY2xiN3lib2drMDlyMzNubjVvZWlubWh5OSJ9.4kkxGrn9aFyGWxvtY2yzcA"
+        mapboxGl.accessToken = mapboxToken
 
         this.map = new mapboxGl.Map({
             container: this.mapContainer.current,
