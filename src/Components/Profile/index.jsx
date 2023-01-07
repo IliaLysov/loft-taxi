@@ -87,7 +87,7 @@ function Profile(events) {
         ) {
             send(e)
         } else {
-            alert('Form is not complete')
+            alert('Form filled out incorrectly')
         }
     }
 
