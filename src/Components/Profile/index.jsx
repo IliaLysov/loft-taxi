@@ -74,15 +74,21 @@ function Profile(events) {
         }
     }
 
-    const handleCVC = (text) => {
-        if (text.length <= 3 && !isNaN(text)) {
-            setCVC(text)
-        }
-    }
+    const handleCVC = (value) => value.replace(/\D/g, "").substring(0, 3)
+
 
     const setPayment = (e) => {
         e.preventDefault()
-        send(e)
+        if (e.target.querySelectorAll('#card')[0].value.length === 19
+        &&
+        e.target.querySelectorAll('#date')[0].value.length === 5
+        &&
+        e.target.querySelectorAll('#cvc')[0].value.length === 3
+        ) {
+            send(e)
+        } else {
+            alert('Form is not complete')
+        }
     }
 
     const cleanForm = () => {
@@ -120,7 +126,7 @@ function Profile(events) {
                                 </div>
                                 <div className={css.inputContainerBottom}>
                                     <label htmlFor="cvc" className={css.label}>CVC</label>
-                                    <Input className={css.input} id="cvc" type="text" value={cvcCard} name="cvc" required onChange={(e) => handleCVC(e.target.value)}/>
+                                    <Input className={css.input} id="cvc" type="text" value={cvcCard} name="cvc" required onChange={(e) => setCVC(handleCVC(e.target.value))}/>
                                 </div>
                             </div>
                         </div>
