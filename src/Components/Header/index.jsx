@@ -15,13 +15,19 @@ function Header(events) {
         removeObjects = ['user', 'payment']
     }
 
+    const escape = () => {
+        window.location.assign(`${window.location.origin}/loft-taxi/dist/`)
+        logOut()
+        removeObjects.forEach(e => localStorage.removeItem(e))
+    }
+
     return (
         <header className={css.header}>
             <img className={css.logo} src={logo_img} alt="logo" />
             <div className={css.navigation}>
                 <NavLink to="/loft-taxi/dist/" className={css.nav}>Map</NavLink>
                 <NavLink to="/loft-taxi/dist/profile" className={css.nav}>Profile</NavLink>
-                <button className={css.nav} onClick={() => {logOut(); removeObjects.forEach(e => localStorage.removeItem(e)); window.location.reload(false)}}>Log out</button>
+                <button to="/loft-taxi/dist/" className={css.nav} onClick={escape}>Log out</button>
             </div>
         </header>
     )

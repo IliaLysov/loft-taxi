@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/loft-taxi/dist/static/css/main.1c67e294.css",
-    "main.js": "/loft-taxi/dist/static/js/main.320a7a11.js",
+    "main.js": "/loft-taxi/dist/static/js/main.cabcbe10.js",
     "static/js/787.0b092cc9.chunk.js": "/loft-taxi/dist/static/js/787.0b092cc9.chunk.js",
     "static/media/map.png": "/loft-taxi/dist/static/media/map.15bef711aae77ed45984.png",
     "static/media/logo.svg": "/loft-taxi/dist/static/media/logo.14346112c2e448417e51613c5abdc65c.svg",
-    "static/media/logo-mini.svg": "/loft-taxi/dist/static/media/logo-mini.b62304ff3b4470950e0cfe664bfa2148.svg",
-    "static/media/card-logo.svg": "/loft-taxi/dist/static/media/card-logo.860ed155ecbf2ada9b0afed3a4472f4a.svg",
+    "static/media/logo-mini.svg": "/loft-taxi/dist/static/media/logo-mini.85432263fb14b820e7e835cac8bbd711.svg",
+    "static/media/card-logo.svg": "/loft-taxi/dist/static/media/card-logo.f51ffc5180d27744ef0d9083ef167b6b.svg",
     "index.html": "/loft-taxi/dist/index.html",
-    "static/media/card-chip.svg": "/loft-taxi/dist/static/media/card-chip.c84e78516ea2acc7fa0373212a388630.svg",
-    "static/media/master-card.svg": "/loft-taxi/dist/static/media/master-card.11ada678ce5a721e6616f97159aeb108.svg",
+    "static/media/card-chip.svg": "/loft-taxi/dist/static/media/card-chip.b24d5f4363080cee381f193beecbea1d.svg",
+    "static/media/master-card.svg": "/loft-taxi/dist/static/media/master-card.154b7639417e235c1e5179bbc5abee9e.svg",
     "main.1c67e294.css.map": "/loft-taxi/dist/static/css/main.1c67e294.css.map",
-    "main.320a7a11.js.map": "/loft-taxi/dist/static/js/main.320a7a11.js.map",
+    "main.cabcbe10.js.map": "/loft-taxi/dist/static/js/main.cabcbe10.js.map",
     "787.0b092cc9.chunk.js.map": "/loft-taxi/dist/static/js/787.0b092cc9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1c67e294.css",
-    "static/js/main.320a7a11.js"
+    "static/js/main.cabcbe10.js"
   ]
 }
